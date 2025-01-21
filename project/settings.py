@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
+import os
+from django.templatetags.static import static
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -38,13 +40,15 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'users'
+    'users',
+    'vacancies'
 ]
 
 MIDDLEWARE = [
@@ -122,7 +126,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru-ru'
 
 TIME_ZONE = 'UTC'
 
@@ -130,6 +134,16 @@ USE_I18N = True
 
 USE_TZ = True
 
+STATIC_URL = 'static/'
+
+STATICFILES_DIRS = [
+    BASE_DIR / 'static'
+]
+
+STATIC_ROOT = "staticfiles"
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
+MEDIA_URL = '/uploads/'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
@@ -140,3 +154,38 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+JAZZMIN_SETTINGS = {
+    # Основное
+    "site_title": "AUES Admin",  
+    "site_header": "AUES Панель управления",
+    "site_brand": "EnergoAdmin", 
+    "site_logo": "/aues.ico", 
+    "site_logo_classes": "img-circle", 
+    "site_logo_width": "64px",  
+    "site_logo_height": "64px",
+    "welcome_sign": "Добро пожаловать в административный раздел АУЭС",
+
+
+    "copyright": "AUES University", 
+
+
+    "topmenu_links": [
+        {"name": "На сайт", "url": "/", "icon": "fas fa-globe"},  # Переход на сайт
+    ],
+
+    "show_sidebar": True,  
+    "navigation_expanded": True,  
+    "custom_links": {  
+        "my_app": [
+            {"name": "Статистика", "url": "/admin/my_app/report/", "icon": "fas fa-chart-bar"},
+        ]
+    },
+    "custom_css": "admin/custom.css",
+}
+
+
+JAZZMIN_UI_TWEAKS = {
+    "theme": "flatly",  # Тема оформления
+    "dark_mode": True,  # Темный режим
+}
