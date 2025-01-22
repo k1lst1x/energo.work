@@ -1,0 +1,18 @@
+{% load i18n %}
+
+<!DOCTYPE html>
+<html lang="{{ current_language }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Language Switcher</title>
+</head>
+<body>
+    <h1>{% trans "Главная страница" %} {{ current_language }}</h1>
+    <p>
+        <a href="?lang=en">{% trans "English" %}</a> |
+        <a href="?lang=ru">{% trans "Русский" %}</a> |
+        <a href="?lang=kz">{% trans "Қазақша" %}</a>
+    </p>
+</body>
+</html>
